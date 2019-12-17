@@ -5,7 +5,6 @@
 const Discord = require("discord.js");
 const Readline = require("readline");
 
-var channelName = "common-room";
 
 var client = new Discord.Client();
 
@@ -15,7 +14,7 @@ const rl = Readline.createInterface({
 });
 
 // Lists last 50 messages in the current channel
-function listMessages() {
+let setup = function(channelName) {
   client.getChannelLogs(client.channels.get("name", channelName), (err, msgs) => {
     if (msgs) {
       msgs.reverse().forEach((msg) => {
@@ -103,3 +102,4 @@ client.on("messageDeleted", (msg) => {
 client.on("messageUpdated", (msg) => {
   updateMessagesPrompt(msg);
 });
+exports.setup = setup
